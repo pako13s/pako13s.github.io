@@ -18,6 +18,12 @@
       align-items: center;
       color: #c2185b;
       position: relative;
+      transition: background 0.5s, color 0.5s;
+    }
+
+    body.night {
+      background: linear-gradient(to bottom, #1a1a2e, #2f2f4f);
+      color: #ffccdd;
     }
 
     h1 {
@@ -28,6 +34,10 @@
       animation: fadeIn 2s ease-out forwards;
       opacity: 0;
       text-shadow: 2px 2px 4px #fff;
+    }
+
+    body.night h1 {
+      text-shadow: 2px 2px 4px #000;
     }
 
     @keyframes fadeIn {
@@ -75,6 +85,10 @@
       background-color: #ff82a9;
     }
 
+    body.night .button {
+      background-color: #4e4e7e;
+    }
+
     .image-container {
       margin-top: 20px;
       display: none;
@@ -94,9 +108,30 @@
       0% { transform: scale(0.5); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
+
+    .toggle-night {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      z-index: 3;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      transition: background 0.3s;
+    }
+
+    body.night .toggle-night {
+      background: #333;
+      color: #ffccdd;
+    }
   </style>
 </head>
-<body>
+<body class="night">
+  <button class="toggle-night" onclick="toggleNight()" id="toggleBtn">☀️ Modo claro</button>
   <h1>tu, yo y un vídeo de illojuan, my love</h1>
   <button class="button" onclick="showImage()">dale clic, my love 💘</button>
 
@@ -128,6 +163,13 @@
 
     function showImage() {
       document.getElementById('illojuan-image').style.display = 'block';
+    }
+
+    function toggleNight() {
+      const body = document.body;
+      const btn = document.getElementById('toggleBtn');
+      body.classList.toggle('night');
+      btn.innerText = body.classList.contains('night') ? '☀️ Modo claro' : '🌙 Modo noche';
     }
   </script>
 </body>
