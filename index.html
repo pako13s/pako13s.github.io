@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ay mi cuqui</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom, #ffe2f0, #fff0f8);
+      overflow: hidden;
+      font-family: 'Pacifico', cursive;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #c2185b;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.7rem;
+      text-align: center;
+      z-index: 2;
+      padding: 0 20px;
+      animation: fadeIn 2s ease-out forwards;
+      opacity: 0;
+      text-shadow: 2px 2px 4px #fff;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .falling {
+      position: absolute;
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: fall linear infinite;
+      opacity: 0.85;
+      filter: drop-shadow(0 0 5px rgba(0,0,0,0.2));
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      0% {
+        top: -70px;
+        transform: translateX(0) rotate(0deg);
+      }
+      100% {
+        top: 110%;
+        transform: translateX(80px) rotate(360deg);
+      }
+    }
+
+    .button {
+      margin-top: 20px;
+      z-index: 2;
+      background-color: #ffb6c1;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+
+    .button:hover {
+      background-color: #ff82a9;
+    }
+
+    .image-container {
+      margin-top: 20px;
+      display: none;
+      z-index: 2;
+      animation: pop 1s ease;
+    }
+
+    .image-container img {
+      max-width: 90vw;
+      max-height: 70vh;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      border: 5px solid white;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <h1>tu, yo y un vídeo de illojuan, my love</h1>
+  <button class="button" onclick="showImage()">dale clic, my love 💘</button>
+
+  <div class="image-container" id="illojuan-image">
+    <img src="https://i.pinimg.com/236x/f3/09/02/f30902dc95e656fd0469cf95e7df79e6.jpg" alt="illojuan my love" />
+  </div>
+
+  <script>
+    const images = [
+      'https://png.pngtree.com/png-vector/20240312/ourmid/pngtree-realistic-red-rose-white-background-png-image_11716749.png',
+      'https://pngimg.com/d/hello_kitty_PNG22.png'
+    ];
+
+    function createFalling() {
+      const el = document.createElement('div');
+      el.classList.add('falling');
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.animationDuration = (5 + Math.random() * 5) + 's';
+      el.style.backgroundImage = `url('${images[Math.floor(Math.random() * images.length)]}')`;
+      const size = 30 + Math.random() * 50;
+      el.style.width = el.style.height = size + 'px';
+      el.style.zIndex = Math.random() > 0.5 ? 0 : 3;
+      document.body.appendChild(el);
+
+      setTimeout(() => el.remove(), 12000);
+    }
+
+    setInterval(createFalling, 220);
+
+    function showImage() {
+      document.getElementById('illojuan-image').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
